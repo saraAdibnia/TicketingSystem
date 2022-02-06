@@ -8,7 +8,7 @@ class Department(models.Model):
 class User(models.Model):
     role= models.IntegerField(default=1)
     mobile = models.CharField(max_length=11) #for example 09123456789
-    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
     is_active = models.BooleanField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date =models.DateTimeField(auto_now=True)
