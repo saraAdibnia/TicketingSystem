@@ -18,7 +18,7 @@ class Department(models.Model):
 
 
 class UserProfile(models.Model):  
-    user = models.OneToOneField(User) 
+    user = models.OneToOneField(User, on_delete=models.CASCADE) 
     mobile = models.CharField(max_length=11) #for example 09123456789
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=True)
 
@@ -26,8 +26,11 @@ class UserProfile(models.Model):
 class Ticket(models.Model):
     subject = models.CharField(max_length=100)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    user_id = models.ForeignKey(User,  on_delete=models.CASCADE)
-    operator = models.ForeignKey(User, null=True)
+    user_id = models.ForeignKey(User,  on_delete=models.CASCADE, related_name='user_id',
+                                    verbose_name='user_id',null = True)
+    operator = models.ForeignKey(User,null = True, on_delete=models.CASCADE, related_name='operator',
+
+                                    verbose_name='operator')
     is_answered = models.BooleanField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date =models.DateTimeField(auto_now=True)
